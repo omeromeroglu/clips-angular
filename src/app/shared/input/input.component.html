@@ -1,9 +1,12 @@
 <input [formControl]="control" [type]="type"
 class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
   duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-[placeholder]="placeholder" />
+[placeholder]="placeholder" [mask]= "format" [dropSpecialCharacters]="false"/>
  
  <ng-container *ngIf="control.touched && control.dirty">
+     <p class="text-red-400" *ngIf="control.errors?.pattern">
+         Password must contain 8 characters, 1 uppercase, 1 lowercase, 1 number
+     </p>
     
     <p *ngIf="control.errors?.required" class="text-red-400">
         Field is required
@@ -14,5 +17,11 @@ class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
     </p>
     <p  *ngIf="control.errors?.email" class="text-red-400">
         You must enter a valid Email address.
+    </p>
+    <p *ngIf="control.errors?.min" class="text-red-400">
+        Value too low.
+    </p>
+    <p *ngIf="control.errors?.max" class="text-red-400">
+        Value too high.
     </p>
 </ng-container>
